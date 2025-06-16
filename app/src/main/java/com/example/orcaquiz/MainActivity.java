@@ -49,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return insets;
         });
 
+        binding.answerBtn1.setOnClickListener(this);
+        binding.answerBtn2.setOnClickListener(this);
+        binding.answerBtn3.setOnClickListener(this);
+        binding.answerBtn4.setOnClickListener(this);
+
         for (int i =0; i < quizData.length; i++) {
             ArrayList<String> quiz = new ArrayList<>(); //ArrayList　配列の要素数を決めておかなくてよい
             quiz.add(quizData[i][0]); //問題
@@ -98,5 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         quizArray.remove(0);
         //この問題をquizArrayから削除する(重複出題防止)
+    }
+
+    @Override
+    public void onClick(View view){
+
     }
 }
