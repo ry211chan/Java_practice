@@ -2,6 +2,7 @@ package com.example.orcaquiz;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.orcaquiz.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;  //自動で追加してくれている
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -106,7 +107,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View v){
+        Button answerBtn = (Button) findViewById(view.getId());
+        String btnText = answerBtn.getText().toString();
+        //findViewById(view.getId())→IDを取得してからそれに対応する中身を代入
+        //(Button)→キャスト（型変換）、viewからButtonへ、型推論の進化で今は不要？
+        //answerBtn.getText().toString();→中のテキストを取得（CharSequence型、文字系のインターフェース）
+        //→Stringに変換
+
+        String judgment;
+        if (btnText.equals(rightAnswer)){
+            judgment = "正解です！";
+            //文字列の比較にはequals()を使う。==はintはプリミティブ（基本）型で可能、
+            //Stringはオブジェクト型のためアドレスを比較するため不可（A,Bの箱に入った同じ種類のキャンディーは＝ではない）
+            rightAnswerCount++; //正解数加算
+        } else {
+            judgment = "残念、、";
+        }
+
+        //ダイアログを作製　judgment、答え、閉じるボタンが必要。
 
     }
 }
