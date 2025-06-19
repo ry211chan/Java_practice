@@ -1,5 +1,6 @@
 package com.example.orcaquiz;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.orcaquiz.databinding.ActivityMainBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,9 +125,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             rightAnswerCount++; //正解数加算
         } else {
             judgment = "残念、、";
-        }
+        } //この時点では代入のみでどこにも載っていない
 
         //ダイアログを作製　judgment、答え、閉じるボタンが必要。
+        new MaterialAlertDialogBuilder(this)
+                //MaterialAlertDialogBuilder→ダイアログ（ポップアップウィンドウ）を表示させるクラス。
+                //マテリアル→物質的、現実のように影や奥行きがあるデザイン⇔フラット
+                .setTitle(judgment)
+                .setMessage("答え：" + rightAnswer)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (quizCount == QUIZ_COUNT) {
+                            //出題数まで到達すると結果画面に移動する
+                        } else {
+                            quizCount++;
+                            oQuiz();
+                            //到達していないときは加算、またoQuizメソッドを呼ぶ
+                        }
+                    }
+                })
+                .setCancelable(false) //ダイアログの外側をタップしたときにダイアログを閉じるか？false閉じない
+                .show(); //ダイアログを表示させる（↑までは設計のみで実際表示はされていない）
 
     }
 }
